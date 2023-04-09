@@ -2,6 +2,7 @@ node {
     def server
     def buildInfo
     def rtMaven
+    def rtDocker
     
 
     stage ('Clone') {
