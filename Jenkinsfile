@@ -26,12 +26,12 @@ node {
  
     stage ('Test') {
         echo 'test'
-        rtMaven.run pom: 'spring-petclinic/pom.xml' , goals: 'clean test'
+        rtMaven.run pom: 'pom.xml' , goals: 'clean test'
     }
         
     stage ('Install') {
         echo 'install'
-        rtMaven.run pom: 'spring-petclinic/pom.xml' , goals: 'install', buildInfo: buildInfo
+        rtMaven.run pom: 'pom.xml' , goals: 'install', buildInfo: buildInfo
     }
  
     stage ('Deploy') {
