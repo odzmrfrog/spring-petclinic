@@ -26,6 +26,7 @@ node {
  
     stage ('Test') {
         echo 'test'
+        sh 'java -version'
         rtMaven.run pom: 'pom.xml' , goals: 'clean test'
     }
         
