@@ -6,7 +6,7 @@ node {
 
     stage ('Clone') {
         echo 'Clone'
-        git url: 'https://github.com/odzmrfrog/spring-petclinic.git'
+        git url: 'https://github.com/odzmrfrog/spring-petclinic'
     }
  
     stage ('Artifactory configuration') {
