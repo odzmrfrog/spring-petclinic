@@ -3,11 +3,14 @@ node {
     def buildInfo
     def rtMaven
     
+
     stage ('Clone') {
+        echo 'Clone'
         git url: 'https://github.com/odzmrfrog/spring-petclinic.git'
     }
  
     stage ('Artifactory configuration') {
+        echo 'Config'
         // Obtain an Artifactory server instance, defined in Jenkins --> Manage Jenkins --> Configure System:
         server = Artifactory.server 'ohadrt'
 
@@ -21,18 +24,22 @@ node {
     }
  
     stage ('Test') {
+        echo 'test'
         rtMaven.run pom: 'odzmrfrog/spring-petclinic/pom.xml' , goals: 'clean test'
     }
         
     stage ('Install') {
+        echo 'install'
         rtMaven.run pom: 'odzmrfrog/spring-petclinic/pom.xml' , goals: 'install', buildInfo: buildInfo
     }
  
     stage ('Deploy') {
+        echo 'Deploy'
         rtMaven.deployer.deployArtifacts buildInfo
     }
         
     stage ('Publish build info') {
+        echo 'Publish build info'
         server.publishBuildInfo buildInfo
     }
 }
