@@ -6,7 +6,7 @@ node {
 
     stage ('Clone') {
         echo 'Clone'
-        git clone url: "https://github.com/odzmrfrog/spring-petclinic.git#main"
+        git clone url: 'https://github.com/odzmrfrog/spring-petclinic.git', branch: 'main'
         echo 'Done Cloning'
     }
  
