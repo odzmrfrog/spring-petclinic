@@ -266,7 +266,38 @@
       </snapshots>
     </pluginRepository>
   </pluginRepositories>-->
-
+      <repositories>
+        <repository>
+          <snapshots>
+            <enabled>false</enabled>
+          </snapshots>
+          <id>central</id>
+          <name>ohadz-ob-maven-libs-release</name>
+          <url>https://ohadz.jfrog.io/artifactory/ohadz-ob-maven-libs-release</url>
+        </repository>
+        <repository>
+          <snapshots />
+          <id>snapshots</id>
+          <name>ohadz-ob-maven-libs-snapshot</name>
+          <url>https://ohadz.jfrog.io/artifactory/ohadz-ob-maven-libs-snapshot</url>
+        </repository>
+      </repositories>
+      <pluginRepositories>
+        <pluginRepository>
+          <snapshots>
+            <enabled>false</enabled>
+          </snapshots>
+          <id>central</id>
+          <name>ohadz-ob-maven-libs-release</name>
+          <url>https://ohadz.jfrog.io/artifactory/ohadz-ob-maven-libs-release</url>
+        </pluginRepository>
+        <pluginRepository>
+          <snapshots />
+          <id>snapshots</id>
+          <name>ohadz-ob-maven-libs-snapshot</name>
+          <url>https://ohadz.jfrog.io/artifactory/ohadz-ob-maven-libs-snapshot</url>
+        </pluginRepository>
+      </pluginRepositories>
   <profiles>
     <profile>
       <id>css</id>
@@ -318,42 +349,6 @@
           </plugin>
         </plugins>
       </build>
-    </profile>
-    
-    <profile>
-      <repositories>
-        <repository>
-          <snapshots>
-            <enabled>false</enabled>
-          </snapshots>
-          <id>central</id>
-          <name>ohadz-ob-maven-libs-release</name>
-          <url>https://ohadz.jfrog.io/artifactory/ohadz-ob-maven-libs-release</url>
-        </repository>
-        <repository>
-          <snapshots />
-          <id>snapshots</id>
-          <name>ohadz-ob-maven-libs-snapshot</name>
-          <url>https://ohadz.jfrog.io/artifactory/ohadz-ob-maven-libs-snapshot</url>
-        </repository>
-      </repositories>
-      <pluginRepositories>
-        <pluginRepository>
-          <snapshots>
-            <enabled>false</enabled>
-          </snapshots>
-          <id>central</id>
-          <name>ohadz-ob-maven-libs-release</name>
-          <url>https://ohadz.jfrog.io/artifactory/ohadz-ob-maven-libs-release</url>
-        </pluginRepository>
-        <pluginRepository>
-          <snapshots />
-          <id>snapshots</id>
-          <name>ohadz-ob-maven-libs-snapshot</name>
-          <url>https://ohadz.jfrog.io/artifactory/ohadz-ob-maven-libs-snapshot</url>
-        </pluginRepository>
-      </pluginRepositories>
-      <id>artifactory</id>
     </profile>
     
     <profile>
