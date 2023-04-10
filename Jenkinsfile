@@ -55,7 +55,7 @@ node {
     }
 
     stage ('Push image to Artifactory') {
-        rtDocker.push $ARTIFACTORY_DOCKER_REGISTRY + '/ohad-pet-clinic:latest', 'docker-local', buildInfo
+        rtDocker.push 'ohadz.jfrorg.io/docker' + '/ohad-pet-clinic:latest', 'docker-local', buildInfo
     }
 
     stage ('Publish build info') {
