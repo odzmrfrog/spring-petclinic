@@ -47,7 +47,7 @@ node {
     }
 
     stage ('Build docker image') {
-        docker.build('https://ohadz.jfrog.io/docker' + '/ohad-pet-clinic:latest', 'docker/ohad-pet-clinic')
+        docker.build('https://ohadz.jfrog.io/docker' + '/ohad-pet-clinic:latest', 'docker/ohad-pet-clinic:latest')
     }
 
     stage ('Push image to Artifactory') {
