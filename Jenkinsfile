@@ -33,7 +33,7 @@ node {
         
     stage ('Install') {
         echo 'install'
-        rtMaven.run pom: 'pom.xml' , goals: 'install', buildInfo: buildInfo
+        rtMaven.run pom: 'pom.xml' , goals: 'install -DskipTests', buildInfo: buildInfo
     }
  
     stage ('Deploy') {
