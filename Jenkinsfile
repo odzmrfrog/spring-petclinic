@@ -47,11 +47,12 @@ node {
     }
 
     stage ('Build docker image') {
-        docker.build('ohadz.jfrog.io/docker' + '/ohad-pet-clinic:latest', '.')
+        echo 'Building Docker image'
+        docker.build(ARTIFACTORY_DOCKER_REGISTRY + '/ohad-pet-clinic:latest', '.')
     }
 
     stage ('Push image to Artifactory') {
-        rtDocker.push 'ohadz.jfrog.io/docker' + '/ohad-pet-clinic:latest', 'docker-local', buildInfo
+        rtDocker.push ARTIFACTORY_DOCKER_REGISTRY + '/ohad-pet-clinic:latest', 'docker-local', buildInfo
     }
 
     stage ('Publish build info') {
