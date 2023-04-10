@@ -3,10 +3,6 @@ node {
     def buildInfo
     def rtMaven
     def rtDocker
-    
-    environment {
-        ARTIFACTORY_DOCKER_REGISTRY = credentials('ARTIFACTORY_DOCKER_REGISTRY')
-    }
 
     stage ('Clone') {
         echo 'Clone'
