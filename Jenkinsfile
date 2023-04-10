@@ -23,7 +23,12 @@ node {
         rtDocker = Artifactory.docker server: server
         buildInfo = Artifactory.newBuildInfo()
     }
- 
+    
+    stage ('Purge Cache') {
+        echo 'purge cache'
+        rtMaven.run goals: 'dependency:purge-local-repository'
+    }
+    
     stage ('Test') {
         echo 'test'
         sh 'java -version'
