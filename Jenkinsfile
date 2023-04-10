@@ -51,11 +51,11 @@ node {
 
     stage ('Build docker image') {
         echo 'Building Docker image'
-        docker.build(ARTIFACTORY_DOCKER_REGISTRY + '/ohad-pet-clinic:latest', '.')
+        docker.build($ARTIFACTORY_DOCKER_REGISTRY + '/ohad-pet-clinic:latest', '.')
     }
 
     stage ('Push image to Artifactory') {
-        rtDocker.push ARTIFACTORY_DOCKER_REGISTRY + '/ohad-pet-clinic:latest', 'docker-local', buildInfo
+        rtDocker.push $ARTIFACTORY_DOCKER_REGISTRY + '/ohad-pet-clinic:latest', 'docker-local', buildInfo
     }
 
     stage ('Publish build info') {
