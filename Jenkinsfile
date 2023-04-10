@@ -22,7 +22,6 @@ node {
         rtMaven.resolver releaseRepo: 'ohadz-ob-maven-libs-release', snapshotRepo: 'ohadz-ob-maven-libs-snapshot', server: server
         rtMaven.deployer.deployArtifacts = false // Disable artifacts deployment during Maven run
         rtDocker = Artifactory.docker server: server
-        rtDocker.tool = 'docker'
         buildInfo = Artifactory.newBuildInfo()
     }
  
