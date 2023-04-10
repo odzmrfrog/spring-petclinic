@@ -51,7 +51,7 @@ node {
 
     stage ('Build docker image') {
         echo 'Building Docker image'
-        docker.build('$ARTIFACTORY_DOCKER_REGISTRY' + '/ohad-pet-clinic:latest', '.')
+        docker.build('ohadz.jfrorg.io/docker'+ '/ohad-pet-clinic:latest', '.')
     }
 
     stage ('Push image to Artifactory') {
