@@ -26,7 +26,7 @@ node {
     
     stage ('Purge Cache') {
         echo 'purge cache'
-        rtMaven.run pox: 'pom.xml' , goals: 'dependency:purge-local-repository'
+        rtMaven.run pom: 'pom.xml' , goals: 'dependency:purge-local-repository'
     }
 
     stage ('Test') {
