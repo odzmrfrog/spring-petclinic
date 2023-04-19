@@ -10,6 +10,10 @@ pipeline {
         DOCKER_IMAGE_NAME = "petclinic-cli"
         GIT_REPO = "https://github.com/odzmrfrog/spring-petclinic"
         BRANCH = "main"
+        REPO_RESOLVE_RELEASES = "ohadz-ob-maven-libs-release"
+        REPO_RESOLVE_SNAPSHOTS = "ohadz-ob-maven-libs-snapshot"
+        REPO_DEPLOY_RELEASES = "ohadz-ob-maven-libs-release-local"
+        REPO_DEPLOY_SNAPSHOTS = "ohadz-ob-maven-libs-snapshot-local"
     }
 
     stages {
@@ -19,17 +23,35 @@ pipeline {
             }
         }
 
-        //stage('Artifactory configuration') {
-        //    steps {
-        //        // Configure Maven project's repositories
-        //        jf 'mvn-config --repo-resolve-releases libs-release --repo-resolve-snapshots libs-snapshots --repo-deploy-releases libs-release-local --repo-deploy-snapshots libs-snapshot-local'
-        //    }
-        //}
+        stage('Artifactory configuration') {
+            steps {
+                dir('.')
+                // Configure Maven project's repositories
+                jf 'mvn-config --repo-resolve-releases $REPO_RESOLVE_RELEASES --repo-resolve-snapshots $REPO_RESOLVE_SNAPSHOTS --repo-deploy-releases $REPO_DEPLOY_RELEASES --repo-deploy-snapshots $REPO_DEPLOY_SNAPSHOTS'
+            }
+        }
+      //  stage('Exec Maven commands') {
+      //              steps {
+      //                  dir('maven-examples/maven-example') {
+      //                      // Configure Maven project's repositories
+      //                      jf 'mvn-config --repo-resolve-releases libs-release --repo-resolve-snapshots libs-snapshots --repo-deploy-releases libs-release-local --repo-deploy-snapshots libs-snapshot-local'
+//
+      //                      // Install and publish project
+      //                      jf 'mvn clean install'
+      //                  }
+      //              }
+      //          }
 
         stage('Test') { 
             // test if this stage can be seperated from the rt config stage
             steps {
                 jf 'mvn clean test'
+            }
+        }
+
+        stage('Install'){
+            steps {
+                jf 'mvn install'
             }
         }
 
