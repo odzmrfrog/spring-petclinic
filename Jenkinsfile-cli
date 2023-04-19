@@ -26,7 +26,7 @@ pipeline {
         //    }
         //}
 
-        stage ('Test') { 
+        stage('Test') { 
             // test if this stage can be seperated from the rt config stage
             steps {
                 jf 'mvn clean test'
@@ -40,8 +40,8 @@ pipeline {
         }
 
         stage('Build Scan') {
-            stage {
-                    jf 'rt bs'
+            steps {
+                jf 'rt bs'
             }
         }
 
