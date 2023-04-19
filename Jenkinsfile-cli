@@ -25,9 +25,10 @@ pipeline {
 
         stage('Artifactory configuration') {
             steps {
-                dir('.')
+                dir('.') {
                 // Configure Maven project's repositories
                 jf 'mvn-config --repo-resolve-releases $REPO_RESOLVE_RELEASES --repo-resolve-snapshots $REPO_RESOLVE_SNAPSHOTS --repo-deploy-releases $REPO_DEPLOY_RELEASES --repo-deploy-snapshots $REPO_DEPLOY_SNAPSHOTS'
+                }
             }
         }
       //  stage('Exec Maven commands') {
