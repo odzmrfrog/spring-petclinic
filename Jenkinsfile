@@ -19,7 +19,7 @@ node {
         rtMaven.tool = 'maven' // Tool name from Jenkins configuration
         rtMaven.deployer releaseRepo: 'ohadz-ob-maven-libs-release-local', snapshotRepo: 'ohadz-ob-maven-libs-snapshot-local', server: server
         rtMaven.resolver releaseRepo: 'ohadz-ob-maven-libs-release', snapshotRepo: 'ohadz-ob-maven-libs-snapshot', server: server
-        rtMaven.deployer.deployArtifacts = false // Disable artifacts deployment during Maven run
+        rtMaven.deployer.deployArtifacts = true 
         rtDocker = Artifactory.docker server: server
         buildInfo = Artifactory.newBuildInfo()
     }
@@ -46,6 +46,7 @@ node {
     }
     
     stage ('Add properties') {
+        // Attach custom properties to the published artifacts:
         rtDocker.addProperty("project-name", "ohad-pet-clinic").addProperty("status", "stable")
     }
 
