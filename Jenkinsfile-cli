@@ -11,7 +11,7 @@ pipeline {
         GIT_REPO = "https://github.com/odzmrfrog/spring-petclinic"
         BRANCH = "main"
     }
-    
+
     stages {
         stage('Clone') {
             steps {
@@ -30,12 +30,6 @@ pipeline {
             // test if this stage can be seperated from the rt config stage
             steps {
                 jf 'mvn clean test'
-            }
-        }
-        
-        stage('Publish build info') {
-            steps {
-                jf 'rt build-publish'
             }
         }
 
