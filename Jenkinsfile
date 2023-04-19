@@ -46,7 +46,6 @@ node {
     }
     
     stage ('Add properties') {
-        // Attach custom properties to the published artifacts:
         rtDocker.addProperty("project-name", "ohad-pet-clinic").addProperty("status", "stable")
     }
 
