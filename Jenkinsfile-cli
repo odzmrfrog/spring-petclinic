@@ -4,7 +4,7 @@ pipeline {
         jfrog 'jfrogcli'
     }
 
-    environmnet{
+    environment{
         RT_URL = "ohadz.jfrog.io"
         BUILD_NAME = "petclinic-cli"
         DOCKER_IMAGE_NAME = "petclinic-cli"
