@@ -81,12 +81,12 @@ pipeline {
             }
         }
         
-        stage('Build Scan') {
-            steps {
-                sh 'echo "Scanning"'
-                jf 'build-scan'
-            }
-        }
+        // stage('Build Scan') {
+        //     steps {
+        //         sh 'echo "Scanning"'
+        //         jf 'build-scan'
+        //     }
+        // }
 
         stage('Build Docker image') {
             steps {
