@@ -125,7 +125,7 @@ pipeline {
         }
 
         stage('Scan Build'){
-            stage {
+            steps {
                 jf 'bs'
             }
         }
