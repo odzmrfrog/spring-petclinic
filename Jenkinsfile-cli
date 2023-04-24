@@ -98,7 +98,7 @@ pipeline {
             }
         }
 
-        stage('Scan and push image') {
+        stage('Push image') {
             steps {
                 sh 'echo "Scannig and Pushing"'
                 dir('.') {
@@ -110,7 +110,7 @@ pipeline {
                 }
             }
         }
-        stage( bce ){
+        stage( 'Gather Info' ){
             steps {
                 jf 'rt bce'
                 jf 'rt bag'
