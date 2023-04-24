@@ -17,13 +17,16 @@ pipeline {
     }
 
     stages {
+        
         stage('Clone') {
+            echo 'Cloning'
             steps {
                 git branch: "$BRANCH", url: "$GIT_REPO"
             }
         }
 
         stage('Artifactory configuration') {
+            echo 'Configuring' 
             steps {
                 dir('.') {
                 // Configure Maven project's repositories
@@ -45,24 +48,28 @@ pipeline {
 
         stage('Test') { 
             // test if this stage can be seperated from the rt config stage
+            echo 'Testing'
             steps {
                 jf 'mvn clean test'
             }
         }
 
         stage('Install'){
+            echo 'Installing'
             steps {
-                jf 'mvn install'
+                jf 'mvn install -DskipTests'
             }
         }
 
         stage('Build Scan') {
+            echo 'Scanning'
             steps {
                 jf 'rt bs'
             }
         }
 
         stage('Build Docker image') {
+            echo 'Building a Docker Image'
             steps {
                 script {
                     docker.build("$DOCKER_IMAGE_NAME", 'docker-oci-examples/docker-example')
@@ -71,6 +78,7 @@ pipeline {
         }
 
         stage('Scan and push image') {
+            echo 'Scannig and Pushing'
             steps {
                 dir('docker-oci-examples/docker-example/') {
                     // Scan Docker image for vulnerabilities
@@ -83,6 +91,7 @@ pipeline {
         }
 
         stage('Publish build info') {
+            echo 'Publishing build info'
             steps {
                 jf 'rt build-publish'
             }
