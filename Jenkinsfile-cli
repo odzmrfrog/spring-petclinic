@@ -19,15 +19,15 @@ pipeline {
     stages {
         
         stage('Clone') {
-            sh 'echo "Cloning"'
             steps {
+                sh 'echo "Cloning"'
                 git branch: "$BRANCH", url: "$GIT_REPO"
             }
         }
 
         stage('Artifactory configuration') {
-            sh 'echo "Configuring"'
             steps {
+                sh 'echo "Configuring"'
                 dir('.') {
                 // Configure Maven project's repositories
                 jf 'mvn-config --repo-resolve-releases $REPO_RESOLVE_RELEASES --repo-resolve-snapshots $REPO_RESOLVE_SNAPSHOTS --repo-deploy-releases $REPO_DEPLOY_RELEASES --repo-deploy-snapshots $REPO_DEPLOY_SNAPSHOTS'
@@ -48,29 +48,29 @@ pipeline {
 
         stage('Test') { 
             // test if this stage can be seperated from the rt config stage
-            sh 'echo "Testing"'
             steps {
+                sh 'echo "Testing"'
                 jf 'mvn clean test'
             }
         }
 
         stage('Install'){
-            sh 'echo "Installing"'
             steps {
+                sh 'echo "Installing"'
                 jf 'mvn install -DskipTests'
             }
         }
 
         stage('Build Scan') {
-            sh 'echo "Scanning"'
             steps {
+                sh 'echo "Scanning"'
                 jf 'rt bs'
             }
         }
 
         stage('Build Docker image') {
-            sh 'echo "Building a Docker Image"'
             steps {
+                sh 'echo "Building a Docker Image"'
                 script {
                     docker.build("$DOCKER_IMAGE_NAME", 'docker-oci-examples/docker-example')
                 }
@@ -78,8 +78,8 @@ pipeline {
         }
 
         stage('Scan and push image') {
-            sh 'echo "Scannig and Pushing"'
             steps {
+                sh 'echo "Scannig and Pushing"'
                 dir('docker-oci-examples/docker-example/') {
                     // Scan Docker image for vulnerabilities
                     jf 'docker scan $DOCKER_IMAGE_NAME'
@@ -91,8 +91,8 @@ pipeline {
         }
 
         stage('Publish build info') {
-            sh 'echo "Publishing build info"'
             steps {
+                sh 'echo "Publishing build info"'
                 jf 'rt build-publish'
             }
         }
