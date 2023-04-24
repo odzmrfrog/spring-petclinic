@@ -85,7 +85,7 @@ pipeline {
         stage('Build Scan') {
             steps {
                 sh 'echo "Scanning"'
-                jf 'build-scan --rescan'
+                jf 'build-scan JFROG_CLI_BUILD_NAME JFROG_CLI_BUILD_NUMBER --rescan'
             }
         }
 
