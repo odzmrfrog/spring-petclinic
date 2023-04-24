@@ -12,7 +12,6 @@ node {
  
     stage ('Artifactory configuration') {
         echo 'Config'
-        // Obtain an Artifactory server instance, defined in Jenkins --> Manage Jenkins --> Configure System:
         server = Artifactory.server 'ohadzrt'
 
         rtMaven = Artifactory.newMavenBuild()
@@ -46,7 +45,6 @@ node {
     }
     
     stage ('Add properties') {
-        // Attach custom properties to the published artifacts:
         rtDocker.addProperty("project-name", "ohad-pet-clinic").addProperty("status", "stable")
     }
 
