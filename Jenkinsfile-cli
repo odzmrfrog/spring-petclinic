@@ -85,7 +85,7 @@ pipeline {
         stage('Build Scan') {
             steps {
                 sh 'echo "Scanning"'
-                jf 'build-scan  --fail false --rescan'
+                jf 'build-scan --rescan'
             }
         }
 
