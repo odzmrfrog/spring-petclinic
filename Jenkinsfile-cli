@@ -92,15 +92,15 @@ pipeline {
             steps {
                 sh 'echo "Building a Docker Image"'
                 script {
-                    docker.build("$DOCKER_IMAGE_NAME", 'docker-oci-examples/docker-example')
+                    docker.build("$DOCKER_IMAGE_NAME", '.')
                 }
             }
-        }
+        }xs
 
         stage('Scan and push image') {
             steps {
                 sh 'echo "Scannig and Pushing"'
-                dir('docker-oci-examples/docker-example/') {
+                dir('.') {
                     // Scan Docker image for vulnerabilities
                     jf 'docker scan $DOCKER_IMAGE_NAME'
 
