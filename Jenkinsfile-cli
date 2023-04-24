@@ -77,7 +77,7 @@ pipeline {
         stage('Build Scan') {
             steps {
                 sh 'echo "Scanning"'
-                jf 'rt bs'
+                jf 'build-scan'
             }
         }
 
