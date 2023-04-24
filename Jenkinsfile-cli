@@ -18,6 +18,19 @@ pipeline {
 
     stages {
         
+        stage('Test RT Connectivity') {
+            steps {
+                // Show the installed version of JFrog CLI.
+                jf '-v'
+
+                // Show the configured JFrog Platform instances.
+                jf 'c show'
+
+                // Ping Artifactory.
+                jf 'rt ping'
+            }
+        }
+        
         stage('Clone') {
             steps {
                 sh 'echo "Cloning"'
