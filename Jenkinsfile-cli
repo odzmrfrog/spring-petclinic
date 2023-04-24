@@ -5,9 +5,9 @@ pipeline {
     }
 
     environment{
-        RT_URL = "ohadz.jfrog.io"
+        RT_URL = "https://ohadz.jfrog.io"
         BUILD_NAME = "petclinic-cli"
-        DOCKER_IMAGE_NAME = "petclinic-cli"
+        DOCKER_IMAGE_NAME = "petclinic-cli:latest"
         GIT_REPO = "https://github.com/odzmrfrog/spring-petclinic"
         BRANCH = "main"
         REPO_RESOLVE_RELEASES = "ohadz-ob-maven-libs-release"
