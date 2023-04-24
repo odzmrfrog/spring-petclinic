@@ -74,6 +74,13 @@ pipeline {
             }
         }
 
+        stage('Deploy') {
+            steps {
+                sh 'echo "Deploying"'
+                jf 'mvn deploy'
+            }
+        }
+        
         stage('Build Scan') {
             steps {
                 sh 'echo "Scanning"'
