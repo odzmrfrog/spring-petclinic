@@ -126,7 +126,7 @@ pipeline {
 
         stage('Scan Build'){
             steps {
-                jf 'bs'
+                jf 'bs --fail'
             }
         }
     }
