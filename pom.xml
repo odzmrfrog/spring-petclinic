@@ -112,6 +112,13 @@
       <artifactId>jakarta.xml.bind-api</artifactId>
     </dependency>
 
+    <!-- Ohad test FrogBot -->
+    <dependency>
+      <groupId>log4j</groupId>
+      <artifactId>log4j</artifact>
+      <version>1.2.17</version>
+    </dependency>
+    
   </dependencies>
 
   <build>
