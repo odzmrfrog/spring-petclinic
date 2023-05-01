@@ -40,7 +40,7 @@ jobs:
       - name: Test Maven Project
         run: |
           jf c use setup-jfrog-cli-server
-          jf mvn clean test
+          jf mvn clean test -T 2C
       
       - name: Install Maven Project
         run: jf mvn install -DskipTests
@@ -51,11 +51,10 @@ jobs:
         
       - name: Build Docker Image
         env: 
-          JOB_DOCKER_IMAGE_TAG: ${{ vars.DOCKER_IMAGE_TAG }}
+          JOB_DOCKER_IMAGE_TAG: $(echo ${{vars.DOCKER_IMAGE_TAG }})
         run: |
           docker build -t ${{ vars.DOCKER_IMAGE_NAME }} .
           docker tag ${{ vars.DOCKER_IMAGE_NAME }} $JOB_DOCKER_IMAGE_TAG
-        # tag is ${{ vars.DOCKER_REG_SRV }}/${{ vars.DOCKER_REG_NAME }}/${{ vars.DOCKER_IMAGE_NAME }}:$GITHUB_RUN_ID
           
       - name: Push Docker Image to RT
         run: docker push $JOB_DOCKER_IMAGE_TAG
