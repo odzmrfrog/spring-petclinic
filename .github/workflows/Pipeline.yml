@@ -56,9 +56,10 @@ jobs:
           DOCKER_REG_NAME: ${{ vars.DOCKER_REG_NAME }}
           DOCKER_REG_SRV: ${{ vars.DOCKER_REG_SRV }}
         run: |
-          docker build -t $DOCKER_IMAGE_NAME .
-          docker tag $DOCKER_IMAGE_NAME $JOB_DOCKER_IMAGE_TAG
-          
+          docker build -t ohad-petclinic-gha .
+          docker tag ohad-petclinic-gha ohadz.jfrog.ip/docker/ohad-perclinic-gha
+       # docker build -t $DOCKER_IMAGE_NAME .
+       # docker tag $DOCKER_IMAGE_NAME $JOB_DOCKER_IMAGE_TAG
       - name: Push Docker Image to RT
         run: docker push $JOB_DOCKER_IMAGE_TAG
       
