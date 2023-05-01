@@ -35,13 +35,15 @@ jobs:
           jf -v
       
       - name: Test Maven Project
-        run: jf mvn clean test
+        run: |
+          jf c use setup-jfrog-cli-server
+          jf mvn clean test
       
       - name: Install Maven Project
         run: jf mvn install -DskipTests
       
       - name: Login to Docker Enviroment
-        run: docker login  -u ${{secrets.DOCKER_USER}} -p ${{secrets.JF_ACCESS_TOKEN}} ${{env.DOCKER_REG_SRV}}
+        run: docker login  -u ${{secrets.JF_USER}} -p ${{secrets.JF_PASS}} ${{env.DOCKER_REG_SRV}}
         
       - name: Build Docker Image
         run: |
