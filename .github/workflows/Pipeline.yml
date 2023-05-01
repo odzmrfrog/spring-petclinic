@@ -56,8 +56,8 @@ jobs:
           DOCKER_REG_NAME: ${{ vars.DOCKER_REG_NAME }}
           DOCKER_REG_SRV: ${{ vars.DOCKER_REG_SRV }}
         run: |
-          print $DOCKER_IMAGE_TAG
-          print $(echo $DOCKER_REG_SRV/$DOCKER_REG_NAME/$DOCKER_IMAGE_NAME)
+          echo $DOCKER_IMAGE_TAG
+          echo $(echo $DOCKER_REG_SRV/$DOCKER_REG_NAME/$DOCKER_IMAGE_NAME)
           docker build -t $DOCKER_IMAGE_NAME .
           docker tag $DOCKER_IMAGE_NAME $DOCKER_IMAGE_TAG
        # docker build -t $DOCKER_IMAGE_NAME .
