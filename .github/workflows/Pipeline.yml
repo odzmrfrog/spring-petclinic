@@ -52,7 +52,7 @@ jobs:
       - name: Build and Tag Docker Image
         env: 
           DOCKER_IMAGE_NAME: ${{ vars.DOCKER_IMAGE_NAME }}
-          DOCKER_IMAGE_TAG: $DOCKER_REG_SRV/$DOCKER_REG_NAME/$DOCKER_IMAGE_NAME
+          DOCKER_IMAGE_TAG: $(echo $DOCKER_REG_SRV/$DOCKER_REG_NAME/$DOCKER_IMAGE_NAME)
           DOCKER_REG_NAME: ${{ vars.DOCKER_REG_NAME }}
           DOCKER_REG_SRV: ${{ vars.DOCKER_REG_SRV }}
         run: |
