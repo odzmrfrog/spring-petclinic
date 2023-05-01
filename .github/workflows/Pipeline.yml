@@ -25,13 +25,11 @@ jobs:
           JF_PASSWORD: ${{ secrets.JF_PASS }}
           SERVER_ID: setup-jfrog-cli-server
           
-      - name: Configure Repos
-        env:
-          NEW_ENVAR: ${{ env.DOCKER_REG_SRV }}  
+      - name: Configure Repos  
         #run: jf mvnc --server-id-resolve=setup-jfrog-cli-server --server-id-deploy=setup-jfrog-cli-server --repo-resolve-releases=ohadz-ob-maven-libs-release --repo-deploy-releases=ohadz-ob-maven-libs-release --repo-resolve-snapshots=ohadz-ob-maven-libs-snapshot --repo-deploy-snapshots=ohadz-ob-maven-libs-snapshot
         
         run: |
-          echo this is my docker registery server name ${{ env.NEW_ENVAR }}
+          echo this is my docker registery server name ${{ vars.DOCKER_REG_SRV }}
           jf mvnc --server-id-resolve=setup-jfrog-cli-server --server-id-deploy=setup-jfrog-cli-server --repo-resolve-releases=${{ env.MVN_VIRTUAL_RELEASE_REPO }} --repo-deploy-releases=${{ env.MVN_VIRTUAL_RELEASE_REPO }} --repo-resolve-snapshots=${{ env.MVN_VIRTUAL_SNAPSHOTS_REPO }} --repo-deploy-snapshots=${{ env.MVN_VIRTUAL_SNAPSHOTS_REPO }}     
       - name: Test JFrog CLI
         run: |
