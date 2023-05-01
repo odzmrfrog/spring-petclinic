@@ -23,7 +23,7 @@ jobs:
           JF_URL: ${{ secrets.JF_URL }}
           JF_USER: ${{ secrets.JF_USER }}
           JF_PASSWORD: ${{ secrets.JF_PASS }}
-          SERVER_ID: ohad_saas
+          SERVER_ID: setup-jfrog-cli-server
           
       - name: Configure Repos
         run: jf mvnc --server-id-resolve=$SERVER_ID --server-id-deploy=$SERVER_ID --repo-resolve-releases=${{env.MVN_VIRTUAL_RELEASE_REPO}} --repo-deploy-releases=${{env.MVN_VIRTUAL_RELEASE_REPO}} --repo-resolve-snapshots=${{env.MVN_VIRTUAL_SNAPSHOTS_REPO}} --repo-deploy-snapshots=${{env.MVN_VIRTUAL_SNAPSHOTS_REPO}}
@@ -41,7 +41,7 @@ jobs:
         run: jf mvn install -DskipTests
       
       - name: Login to Docker Enviroment
-        run: docker login ${{env.DOCKER_REG_SRV}} -u ${{secrets.DOCKER_USER}} -p ${{secrets.JF_ACCESS_TOKEN}}
+        run: docker login  -u ${{secrets.DOCKER_USER}} -p ${{secrets.JF_ACCESS_TOKEN}} ${{env.DOCKER_REG_SRV}}
         
       - name: Build Docker Image
         run: |
