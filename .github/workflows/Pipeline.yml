@@ -46,12 +46,12 @@ jobs:
         run: jf mvn install -DskipTests
       
       - name: Login to Docker Enviroment
-        env: 
-          JOB_DOCKER_IMAGE_TAG: ${{ vars.DOCKER_IMAGE_TAG }}
-          run: docker login  -u ${{ secrets.JF_USER }} -p ${{ secrets.JF_PASS }} ${{ vars.DOCKER_REG_SRV }}
+        run: docker login  -u ${{ secrets.JF_USER }} -p ${{ secrets.JF_PASS }} ${{ vars.DOCKER_REG_SRV }}
         #run: docker login ohadz.jfrog.io -u ${{ secrets.JF_USER }} -p ${{ secrets.JF_PASS }} 
         
       - name: Build Docker Image
+        env: 
+          JOB_DOCKER_IMAGE_TAG: ${{ vars.DOCKER_IMAGE_TAG }}
         run: |
           docker build -t ${{ vars.DOCKER_IMAGE_NAME }} .
           docker tag ${{ vars.DOCKER_IMAGE_NAME }} $JOB_DOCKER_IMAGE_TAG
