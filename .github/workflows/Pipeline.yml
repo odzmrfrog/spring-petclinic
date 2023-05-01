@@ -30,7 +30,7 @@ jobs:
         
         run: |
           echo this is my docker registery server name ${{ vars.DOCKER_REG_SRV }}
-          jf mvnc --server-id-resolve=setup-jfrog-cli-server --server-id-deploy=setup-jfrog-cli-server --repo-resolve-releases=${{ env.MVN_VIRTUAL_RELEASE_REPO }} --repo-deploy-releases=${{ env.MVN_VIRTUAL_RELEASE_REPO }} --repo-resolve-snapshots=${{ env.MVN_VIRTUAL_SNAPSHOTS_REPO }} --repo-deploy-snapshots=${{ env.MVN_VIRTUAL_SNAPSHOTS_REPO }}     
+          jf mvnc --server-id-resolve=setup-jfrog-cli-server --server-id-deploy=setup-jfrog-cli-server --repo-resolve-releases=${{ vars.MVN_VIRTUAL_RELEASE_REPO }} --repo-deploy-releases=${{ vars.MVN_VIRTUAL_RELEASE_REPO }} --repo-resolve-snapshots=${{ vars.MVN_VIRTUAL_SNAPSHOTS_REPO }} --repo-deploy-snapshots=${{ vars.MVN_VIRTUAL_SNAPSHOTS_REPO }}     
       - name: Test JFrog CLI
         run: |
           jf c show
@@ -46,14 +46,14 @@ jobs:
         run: jf mvn install -DskipTests
       
       - name: Login to Docker Enviroment
-        run: docker login  -u ${{ secrets.JF_USER }} -p ${{ secrets.JF_PASS }} ${{ env.DOCKER_REG_SRV }}
+        run: docker login  -u ${{ secrets.JF_USER }} -p ${{ secrets.JF_PASS }} ${{ vars.DOCKER_REG_SRV }}
         #run: docker login ohadz.jfrog.io -u ${{ secrets.JF_USER }} -p ${{ secrets.JF_PASS }} 
         
       - name: Build Docker Image
         run: |
-          docker build -t ${{ env.DOCKER_IMAGE_NAME }} .
-          docker tag ${{ env.DOCKER_IMAGE_NAME }} ${{ env.DOCKER_IMAGE_TAG }}
-          #  tag is ${{ env.DOCKER_REG_SRV }}/${{ env.DOCKER_REG_NAME }}/${{ env.DOCKER_IMAGE_NAME }}:$GITHUB_RUN_ID
+          docker build -t ${{ vars.DOCKER_IMAGE_NAME }} .
+          docker tag ${{ vars.DOCKER_IMAGE_NAME }} ${{ vars.DOCKER_IMAGE_TAG }}
+          #  tag is ${{ vars.DOCKER_REG_SRV }}/${{ vars.DOCKER_REG_NAME }}/${{ vars.DOCKER_IMAGE_NAME }}:$GITHUB_RUN_ID
           
       - name: Push Docker Image to RT
         run: docker push ${{env.DOCKER_IMAGE_TAG}}
