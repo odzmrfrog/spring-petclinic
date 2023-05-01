@@ -58,4 +58,7 @@ jobs:
           # Publish build info
           jf rt bp
           
+      - name: Scan Build
+        run: jf bs
+          
     
