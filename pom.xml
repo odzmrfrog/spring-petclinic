@@ -236,7 +236,7 @@
     </license>
   </licenses>
 
-  <repositories>
+  <!-- <repositories>
     <repository>
       <id>spring-snapshots</id>
       <name>Spring Snapshots</name>
@@ -272,8 +272,8 @@
         <enabled>false</enabled>
       </snapshots>
     </pluginRepository>
-  </pluginRepositories>
- <!--     <repositories>
+  </pluginRepositories> -->
+ <!--<repositories>
         <repository>
           <snapshots>
             <enabled>false</enabled>
