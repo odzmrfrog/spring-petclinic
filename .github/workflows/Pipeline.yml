@@ -55,7 +55,7 @@ jobs:
         run: |
           docker build -t ${{ vars.DOCKER_IMAGE_NAME }} .
           docker tag ${{ vars.DOCKER_IMAGE_NAME }} $JOB_DOCKER_IMAGE_TAG
-          #  tag is ${{ vars.DOCKER_REG_SRV }}/${{ vars.DOCKER_REG_NAME }}/${{ vars.DOCKER_IMAGE_NAME }}:$GITHUB_RUN_ID
+        # tag is ${{ vars.DOCKER_REG_SRV }}/${{ vars.DOCKER_REG_NAME }}/${{ vars.DOCKER_IMAGE_NAME }}:$GITHUB_RUN_ID
           
       - name: Push Docker Image to RT
         run: docker push $JOB_DOCKER_IMAGE_TAG
