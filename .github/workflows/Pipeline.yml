@@ -40,7 +40,7 @@ jobs:
       - name: Test Maven Project
         run: |
           jf c use setup-jfrog-cli-server
-          jf mvn clean test -T 4C
+          jf mvn clean test -T 4
       
       - name: Install Maven Project
         run: jf mvn install -DskipTests
