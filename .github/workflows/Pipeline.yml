@@ -39,7 +39,7 @@ jobs:
         run: jf mvn install -DskipTests
       
       - name: Login to Docker Enviroment
-        run: docker login ${{env.DOCKER_REG_SRV}} -u ${{secrets.DOCKER_USER}} -p ${{secrets.DOCKER_PASSWORD}}
+        run: docker login ${{env.DOCKER_REG_SRV}} -u ${{secrets.DOCKER_USER}} -p ${{secrets.JF_ACCESS_TOKEN}}
         
       - name: Build Docker Image
         run: |
