@@ -39,13 +39,13 @@ jobs:
         run: jf mvn install -DskipTests
       
       - name: Login to Docker Enviroment
-        run: docker login ${{env.DOCKER_REG_SRV}} -u ${{secrets.DOCKER_USER}} -p ${{secrets.JF_ACCESS_TOKEN}}
+        run: docker login ${{secter.DOCKER_REG_SRV}} -u ${{secrets.DOCKER_USER}} -p ${{secrets.JF_ACCESS_TOKEN}}
         
       - name: Build Docker Image
         run: |
           docker build -t ${{env.DOCKER_IMAGE_NAME}} .
           docker tag ${{env.DOCKER_IMAGE_NAME}} ${{env.DOCKER_IMAGE_TAG}}
-          #  tag is ${{env.DOCKER_REG_SRV}}/${{env.DOCKER_REG_NAME}}/${{env.DOCKER_IMAGE_NAME}}:latest
+          #  tag is ${{secret.DOCKER_REG_SRV}}/${{env.DOCKER_REG_NAME}}/${{env.DOCKER_IMAGE_NAME}}:latest
           
       - name: Push Docker Image to RT
         run: docker push ${{env.DOCKER_IMAGE_TAG}}
