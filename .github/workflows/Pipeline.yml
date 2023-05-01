@@ -26,8 +26,8 @@ jobs:
           SERVER_ID: setup-jfrog-cli-server
           
       - name: Configure Repos
-        run: jf mvnc --server-id-resolve=setup-jfrog-cli-server --server-id-deploy=setup-jfrog-cli-server --repo-resolve-releases=ohadz-ob-maven-libs-release --repo-deploy-releases=ohadz-ob-maven-libs-release --repo-resolve-snapshots=ohadz-ob-maven-libs-snapshot --repo-deploy-snapshots=ohadz-ob-maven-libs-snapshot
-        #run: jf mvnc --server-id-resolve=setup-jfrog-cli-server --server-id-deploy=setup-jfrog-cli-server --repo-resolve-releases=${{env.MVN_VIRTUAL_RELEASE_REPO}} --repo-deploy-releases=${{env.MVN_VIRTUAL_RELEASE_REPO}} --repo-resolve-snapshots=${{env.MVN_VIRTUAL_SNAPSHOTS_REPO}} --repo-deploy-snapshots=${{env.MVN_VIRTUAL_SNAPSHOTS_REPO}}     
+        #run: jf mvnc --server-id-resolve=setup-jfrog-cli-server --server-id-deploy=setup-jfrog-cli-server --repo-resolve-releases=ohadz-ob-maven-libs-release --repo-deploy-releases=ohadz-ob-maven-libs-release --repo-resolve-snapshots=ohadz-ob-maven-libs-snapshot --repo-deploy-snapshots=ohadz-ob-maven-libs-snapshot
+        run: jf mvnc --server-id-resolve=setup-jfrog-cli-server --server-id-deploy=setup-jfrog-cli-server --repo-resolve-releases=${{ env.MVN_VIRTUAL_RELEASE_REPO }} --repo-deploy-releases=${{ env.MVN_VIRTUAL_RELEASE_REPO }} --repo-resolve-snapshots=${{ env.MVN_VIRTUAL_SNAPSHOTS_REPO }} --repo-deploy-snapshots=${{ env.MVN_VIRTUAL_SNAPSHOTS_REPO }}     
       - name: Test JFrog CLI
         run: |
           jf c show
@@ -43,14 +43,14 @@ jobs:
         run: jf mvn install -DskipTests
       
       - name: Login to Docker Enviroment
-       # run: docker login  -u ${{secrets.JF_USER}} -p ${{secrets.JF_PASS}} ${{env.DOCKER_REG_SRV}}
-        run: docker login ohadz.jfrog.io -u ${{secrets.JF_USER}} -p ${{secrets.JF_PASS}} 
+        run: docker login  -u ${{ secrets.JF_USER }} -p ${{ secrets.JF_PASS }} ${{ env.DOCKER_REG_SRV }}
+        #run: docker login ohadz.jfrog.io -u ${{ secrets.JF_USER }} -p ${{ secrets.JF_PASS }} 
         
       - name: Build Docker Image
         run: |
-          docker build -t ${{env.DOCKER_IMAGE_NAME}} .
-          docker tag ${{env.DOCKER_IMAGE_NAME}} ${{env.DOCKER_IMAGE_TAG}}
-          #  tag is ${{env.DOCKER_REG_SRV}}/${{env.DOCKER_REG_NAME}}/${{env.DOCKER_IMAGE_NAME}}:latest
+          docker build -t ${{ env.DOCKER_IMAGE_NAME }} .
+          docker tag ${{ env.DOCKER_IMAGE_NAME }} ${{ env.DOCKER_IMAGE_TAG }}
+          #  tag is ${{ env.DOCKER_REG_SRV }}/${{ env.DOCKER_REG_NAME }}/${{ env.DOCKER_IMAGE_NAME }}:$GITHUB_RUN_ID
           
       - name: Push Docker Image to RT
         run: docker push ${{env.DOCKER_IMAGE_TAG}}
