@@ -26,8 +26,8 @@ jobs:
           SERVER_ID: setup-jfrog-cli-server
           
       - name: Configure Repos
-        #run: jf mvnc --server-id-resolve=setup-jfrog-cli-server --server-id-deploy=setup-jfrog-cli-server --repo-resolve-releases=ohadz-ob-maven-libs-release --repo-deploy-releases=ohadz-ob-maven-libs-release --repo-resolve-snapshots=ohadz-ob-maven-libs-snapshot --repo-deploy-snapshots=ohadz-ob-maven-libs-snapshot
-        run: jf mvnc --server-id-resolve=setup-jfrog-cli-server --server-id-deploy=setup-jfrog-cli-server --repo-resolve-releases=${{env.MVN_VIRTUAL_RELEASE_REPO}} --repo-deploy-releases=${{env.MVN_VIRTUAL_RELEASE_REPO}} --repo-resolve-snapshots=${{env.MVN_VIRTUAL_SNAPSHOTS_REPO}} --repo-deploy-snapshots=${{env.MVN_VIRTUAL_SNAPSHOTS_REPO}}     
+        run: jf mvnc --server-id-resolve=setup-jfrog-cli-server --server-id-deploy=setup-jfrog-cli-server --repo-resolve-releases=ohadz-ob-maven-libs-release --repo-deploy-releases=ohadz-ob-maven-libs-release --repo-resolve-snapshots=ohadz-ob-maven-libs-snapshot --repo-deploy-snapshots=ohadz-ob-maven-libs-snapshot
+        #run: jf mvnc --server-id-resolve=setup-jfrog-cli-server --server-id-deploy=setup-jfrog-cli-server --repo-resolve-releases=${{env.MVN_VIRTUAL_RELEASE_REPO}} --repo-deploy-releases=${{env.MVN_VIRTUAL_RELEASE_REPO}} --repo-resolve-snapshots=${{env.MVN_VIRTUAL_SNAPSHOTS_REPO}} --repo-deploy-snapshots=${{env.MVN_VIRTUAL_SNAPSHOTS_REPO}}     
       - name: Test JFrog CLI
         run: |
           jf c show
