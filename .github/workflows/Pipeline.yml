@@ -24,7 +24,7 @@ jobs:
           JF_ACCESS_TOKEN: ${{ secrets.JF_ACCESS_TOKEN }}
 
       - name: Configure Repos
-        run: jf mvnc --repo-resolve-releases=$env.MVN_VIRTUAL_RELEASE_REPO --repo-deploy-releases=$env.MVN_VIRTUAL_RELEASE_REPO --repo-resolve-snapshots=$env.MVN_VIRTUAL_SNAPSHOTS_REPO --repo-deploy-snapshots=$env.MVN_VIRTUAL_SNAPSHOTS_REPO
+        run: jf mvnc --repo-resolve-releases=${{env.MVN_VIRTUAL_RELEASE_REPO}} --repo-deploy-releases=${{env.MVN_VIRTUAL_RELEASE_REPO}} --repo-resolve-snapshots=${{env.MVN_VIRTUAL_SNAPSHOTS_REPO}} --repo-deploy-snapshots=${{env.MVN_VIRTUAL_SNAPSHOTS_REPO}}
       
       - name: Test JFrog CLI
         run: |
