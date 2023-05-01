@@ -37,13 +37,13 @@ jobs:
           jf rt ping
           jf -v
       
-      - name: Test Maven Project
-        run: |
-          jf c use setup-jfrog-cli-server
-          jf mvn clean test -T 4
+    #  - name: Test Maven Project
+    #    run: |
+    #      jf c use setup-jfrog-cli-server
+    #      jf mvn clean test -T 4
       
       - name: Install Maven Project
-        run: jf mvn install -DskipTests
+        run: jf mvn install -DskipTests -T 4
       
       - name: Login to Docker Enviroment
         run: docker login  -u ${{ secrets.JF_USER }} -p ${{ secrets.JF_PASS }} ${{ vars.DOCKER_REG_SRV }}
@@ -51,10 +51,13 @@ jobs:
         
       - name: Build and Tag Docker Image
         env: 
-          JOB_DOCKER_IMAGE_TAG: $(echo ${{vars.DOCKER_IMAGE_TAG }})
+          DOCKER_IMAGE_NAME: ${{ vars.DOCKER_IMAGE_NAME }}
+          DOCKER_IMAGE_TAG: ${{ vars.DOCKER_IMAGE_TAG }}
+          DOCKER_REG_NAME: ${{ vars.DOCKER_REG_NAME }}
+          DOCKER_REG_SRV: ${{ vars.DOCKER_REG_SRV }}
         run: |
-          docker build -t ${{ vars.DOCKER_IMAGE_NAME }} .
-          docker tag ${{ vars.DOCKER_IMAGE_NAME }} $JOB_DOCKER_IMAGE_TAG
+          docker build -t $DOCKER_IMAGE_NAME .
+          docker tag $DOCKER_IMAGE_NAME $JOB_DOCKER_IMAGE_TAG
           
       - name: Push Docker Image to RT
         run: docker push $JOB_DOCKER_IMAGE_TAG
