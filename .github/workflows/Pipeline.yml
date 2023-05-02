@@ -64,7 +64,7 @@ jobs:
        #docker tag $DOCKER_IMAGE_NAME $JOB_DOCKER_IMAGE_TAG
       - name: Push Docker Image to RT
        #run: docker push $DOCKER_IMAGE_TAG
-        run: docker push ohadz.jfrog.io/docker/ohad-petclinic-gha:latest
+        run: jf docker push ohadz.jfrog.io/docker/ohad-petclinic-gha:latest
       
       - name: Collect and Publish Build Info
         run: |
