@@ -37,10 +37,10 @@ jobs:
           jf rt ping
           jf -v
       
-    #  - name: Test Maven Project
-    #    run: |
-    #      jf c use setup-jfrog-cli-server
-    #      jf mvn clean test -T 4
+      - name: Test Maven Project
+        run: | 
+          jf mvn clean test -T 4
+        #jf c use setup-jfrog-cli-server
       
       - name: Install Maven Project
         run: jf mvn install -DskipTests -T 4
