@@ -47,7 +47,6 @@ jobs:
       
       - name: Login to Docker Enviroment
         run: docker login  -u ${{ secrets.JF_USER }} -p ${{ secrets.JF_PASS }} ${{ vars.DOCKER_REG_SRV }}
-        #run: docker login ohadz.jfrog.io -u ${{ secrets.JF_USER }} -p ${{ secrets.JF_PASS }} 
         
       - name: Build and Tag Docker Image
         env: 
