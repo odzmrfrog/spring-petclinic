@@ -56,7 +56,7 @@ jobs:
           DOCKER_REG_NAME: ${{ vars.DOCKER_REG_NAME }}
           DOCKER_REG_SRV: ${{ vars.DOCKER_REG_SRV }}
         run: |
-          echo " this is the tag - ${{ vars.DOCKER_IMAGE_TAG }}"
+          echo " this is the tag ${{ vars.DOCKER_IMAGE_TAG }} "
           echo " this is also the tag $(echo $DOCKER_REG_SRV/$DOCKER_REG_NAME/$DOCKER_IMAGE_NAME) "
           docker build -t ohad-petclinic-gha:latest .
           docker tag ohad-petclinic-gha:latest ohadz.jfrog.io/docker/ohad-petclinic-gha:latest
