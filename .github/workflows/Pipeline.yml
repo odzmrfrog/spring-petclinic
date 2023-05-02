@@ -47,7 +47,6 @@ jobs:
       
       - name: Login to Docker Enviroment
         run: docker login  -u ${{ secrets.JF_USER }} -p ${{ secrets.JF_PASS }} ${{ vars.DOCKER_REG_SRV }}
-        
       - name: Build and Tag Docker Image
         env: 
           DOCKER_IMAGE_NAME: ${{ vars.DOCKER_IMAGE_NAME }}
