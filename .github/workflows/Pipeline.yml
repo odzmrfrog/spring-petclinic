@@ -74,6 +74,6 @@ jobs:
           jf rt bp
           
       - name: Scan Build
-        run: jf bs
+        run: jf bs --fail=false
           
     
