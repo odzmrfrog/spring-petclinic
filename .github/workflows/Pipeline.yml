@@ -22,7 +22,7 @@ jobs:
       - name: Setup JFrog CLI
         uses: jfrog/setup-jfrog-cli@v3
         env:
-          JF_URL: ${{ secrets.JF_URL }}
+          JF_URL: ${{ secrets.JF_URL_SH }}
           JF_USER: ${{ secrets.JF_USER }}
           JF_PASSWORD: ${{ secrets.JF_PASS }}
           SERVER_ID: setup-jfrog-cli-server
@@ -48,16 +48,16 @@ jobs:
         run: jf mvn install -DskipTests -T 4
       
       - name: Login to Docker Enviroment
-        run: docker login ${{ vars.DOCKER_REG_SRV }} -u ${{ secrets.JF_USER }} -p ${{ secrets.JF_PASS }} 
+        run: docker login ${{ vars.DOCKER_REG_SRV_SH }} -u ${{ secrets.JF_USER }} -p ${{ secrets.JF_PASS }} 
       - name: Build and Tag Docker Image
         env: 
           DOCKER_IMAGE_NAME: ${{ vars.DOCKER_IMAGE_NAME }}
-          DOCKER_IMAGE_TAG: $(echo $DOCKER_REG_SRV/$DOCKER_REG_NAME/$DOCKER_IMAGE_NAME)
+          DOCKER_IMAGE_TAG: $(echo $DOCKER_REG_SRV_SH/$DOCKER_REG_NAME/$DOCKER_IMAGE_NAME)
           DOCKER_REG_NAME: ${{ vars.DOCKER_REG_NAME }}
-          DOCKER_REG_SRV: ${{ vars.DOCKER_REG_SRV }}
+          DOCKER_REG_SRV: ${{ vars.DOCKER_REG_SRV_SH }}
         run: |
           docker build -t ohad-petclinic-gha .
-          docker tag ohad-petclinic-gha:latest ohadz.jfrog.io/docker/ohad-petclinic-gha:latest
+          docker tag ohad-petclinic-gha:latest 34.0.208.210/docker/ohad-petclinic-gha:latest
        #echo " this is the tag ${{ vars.DOCKER_IMAGE_TAG }} "
        #echo " this is also the tag $(echo $DOCKER_REG_SRV/$DOCKER_REG_NAME/$DOCKER_IMAGE_NAME) "
        #docker build -t $DOCKER_IMAGE_NAME .
