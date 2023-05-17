@@ -25,6 +25,15 @@ jobs:
         with:
           java-version: "11"
           distribution: "temurin"
+      - name: Setup JFrog CLI
+        uses: jfrog/setup-jfrog-cli@v3
+        env:
+          JF_URL: ${{ vars.JF_URL_SH }}
+          JF_USER: ${{ secrets.JF_USER }}
+          JF_PASSWORD: ${{ secrets.JF_PASS }}
+          SERVER_ID: setup-jfrog-cli-server
+     
+     
       - name: Configure Repos  
               #run: jf mvnc --server-id-resolve=setup-jfrog-cli-server --server-id-deploy=setup-jfrog-cli-server --repo-resolve-releases=ohadz-ob-maven-libs-release --repo-deploy-releases=ohadz-ob-maven-libs-release --repo-resolve-snapshots=ohadz-ob-maven-libs-snapshot --repo-deploy-snapshots=ohadz-ob-maven-libs-snapshot
 
