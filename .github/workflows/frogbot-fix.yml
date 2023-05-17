@@ -25,12 +25,16 @@ jobs:
         with:
           java-version: "11"
           distribution: "temurin"
+      - name: Configure Repos  
+              #run: jf mvnc --server-id-resolve=setup-jfrog-cli-server --server-id-deploy=setup-jfrog-cli-server --repo-resolve-releases=ohadz-ob-maven-libs-release --repo-deploy-releases=ohadz-ob-maven-libs-release --repo-resolve-snapshots=ohadz-ob-maven-libs-snapshot --repo-deploy-snapshots=ohadz-ob-maven-libs-snapshot
+
+        run: jf mvnc --server-id-resolve=setup-jfrog-cli-server --server-id-deploy=setup-jfrog-cli-server --repo-resolve-releases=${{ vars.MVN_VIRTUAL_RELEASE_REPO }} --repo-deploy-releases=${{ vars.MVN_VIRTUAL_RELEASE_REPO }} --repo-resolve-snapshots=${{ vars.MVN_VIRTUAL_SNAPSHOTS_REPO }} --repo-deploy-snapshots=${{ vars.MVN_VIRTUAL_SNAPSHOTS_REPO }}     
 
       - uses: jfrog/frogbot@v2
         env:
           # [Mandatory]
           # JFrog platform URL
-          JF_URL: ${{ secrets.JF_URL }}
+          JF_URL: ${{ vars.JF_URL }}
 
           # [Mandatory if JF_USER and JF_PASSWORD are not provided]
           # JFrog access token with 'read' permissions on Xray service
