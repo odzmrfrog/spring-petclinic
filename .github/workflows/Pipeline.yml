@@ -22,7 +22,7 @@ jobs:
       - name: Setup JFrog CLI
         uses: jfrog/setup-jfrog-cli@v3
         env:
-          JF_URL: ${{ vars.JF_URL_SH }}
+          JF_URL: ${{ vars.JF_URL }}
           JF_USER: ${{ secrets.JF_USER }}
           JF_PASSWORD: ${{ secrets.JF_PASS }}
           SERVER_ID: setup-jfrog-cli-server
@@ -31,7 +31,7 @@ jobs:
         #run: jf mvnc --server-id-resolve=setup-jfrog-cli-server --server-id-deploy=setup-jfrog-cli-server --repo-resolve-releases=ohadz-ob-maven-libs-release --repo-deploy-releases=ohadz-ob-maven-libs-release --repo-resolve-snapshots=ohadz-ob-maven-libs-snapshot --repo-deploy-snapshots=ohadz-ob-maven-libs-snapshot
         
         run: |
-          echo this is my docker registery server name ${{ vars.DOCKER_REG_SRV_SH }}
+          echo this is my docker registery server name ${{ vars.DOCKER_REG_SRV }}
           jf mvnc --server-id-resolve=setup-jfrog-cli-server --server-id-deploy=setup-jfrog-cli-server --repo-resolve-releases=${{ vars.MVN_VIRTUAL_RELEASE_REPO }} --repo-deploy-releases=${{ vars.MVN_VIRTUAL_RELEASE_REPO }} --repo-resolve-snapshots=${{ vars.MVN_VIRTUAL_SNAPSHOTS_REPO }} --repo-deploy-snapshots=${{ vars.MVN_VIRTUAL_SNAPSHOTS_REPO }}     
       - name: Test JFrog CLI
         run: |
@@ -48,13 +48,13 @@ jobs:
         run: jf mvn install -DskipTests -T 4
       
       - name: Login to Docker Enviroment
-        run: docker login ${{ vars.DOCKER_REG_SRV_SH }} -u ${{ secrets.JF_USER }} -p ${{ secrets.JF_PASS }} 
+        run: docker login ${{ vars.DOCKER_REG_SRV }} -u ${{ secrets.JF_USER }} -p ${{ secrets.JF_PASS }} 
       - name: Build and Tag Docker Image
         env: 
           DOCKER_IMAGE_NAME: ${{ vars.DOCKER_IMAGE_NAME }}
-          DOCKER_IMAGE_TAG: $(echo $DOCKER_REG_SRV_SH/$DOCKER_REG_NAME/$DOCKER_IMAGE_NAME)
+          DOCKER_IMAGE_TAG: $(echo $DOCKER_REG_SRV/$DOCKER_REG_NAME/$DOCKER_IMAGE_NAME)
           DOCKER_REG_NAME: ${{ vars.DOCKER_REG_NAME }}
-          DOCKER_REG_SRV: ${{ vars.DOCKER_REG_SRV_SH }}
+          DOCKER_REG_SRV: ${{ vars.DOCKER_REG_SRV }}
         run: |
           docker build -t ohad-petclinic-gha .
           docker tag ohad-petclinic-gha:latest ohadz-ha.devopsacc.team/docker/ohad-petclinic-gha:latest
