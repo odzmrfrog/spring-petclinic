@@ -22,16 +22,16 @@ jobs:
       - name: Setup JFrog CLI
         uses: jfrog/setup-jfrog-cli@v3
         env:
-          JF_URL: ${{ vars.JF_URL }}
-          JF_USER: ${{ secrets.JF_USER }}
-          JF_PASSWORD: ${{ secrets.JF_PASS }}
+          JF_URL: ${{ vars.ASAF_URL }}
+          JF_USER: ${{ secrets.ASAF_USER }}
+          JF_PASSWORD: ${{ secrets.ASAF_PASS }}
           SERVER_ID: setup-jfrog-cli-server
           
       - name: Configure Repos  
         #run: jf mvnc --server-id-resolve=setup-jfrog-cli-server --server-id-deploy=setup-jfrog-cli-server --repo-resolve-releases=ohadz-ob-maven-libs-release --repo-deploy-releases=ohadz-ob-maven-libs-release --repo-resolve-snapshots=ohadz-ob-maven-libs-snapshot --repo-deploy-snapshots=ohadz-ob-maven-libs-snapshot
         
         run: |
-          echo this is my docker registery server name ${{ vars.DOCKER_REG_SRV }}
+          echo this is my docker registery server name ${{ vars.ASAF_REG_SRV }}
           jf mvnc --server-id-resolve=setup-jfrog-cli-server --server-id-deploy=setup-jfrog-cli-server --repo-resolve-releases=${{ vars.MVN_VIRTUAL_RELEASE_REPO }} --repo-deploy-releases=${{ vars.MVN_VIRTUAL_RELEASE_REPO }} --repo-resolve-snapshots=${{ vars.MVN_VIRTUAL_SNAPSHOTS_REPO }} --repo-deploy-snapshots=${{ vars.MVN_VIRTUAL_SNAPSHOTS_REPO }}     
       - name: Test JFrog CLI
         run: |
@@ -48,23 +48,23 @@ jobs:
         run: jf mvn install -DskipTests -T 4
       
       - name: Login to Docker Enviroment
-        run: docker login ${{ vars.DOCKER_REG_SRV }} -u ${{ secrets.JF_USER }} -p ${{ secrets.JF_PASS }} 
+        run: docker login ${{ vars.ASAF_REG_SRV }} -u ${{ secrets.ASAF_USER }} -p ${{ secrets.ASAF_PASS }} 
       - name: Build and Tag Docker Image
         env: 
           DOCKER_IMAGE_NAME: ${{ vars.DOCKER_IMAGE_NAME }}
-          DOCKER_IMAGE_TAG: $(echo $DOCKER_REG_SRV/$DOCKER_REG_NAME/$DOCKER_IMAGE_NAME)
+          DOCKER_IMAGE_TAG: $(echo $ASAF_REG_SRV/$DOCKER_REG_NAME/$DOCKER_IMAGE_NAME)
           DOCKER_REG_NAME: ${{ vars.DOCKER_REG_NAME }}
-          DOCKER_REG_SRV: ${{ vars.DOCKER_REG_SRV }}
+          DOCKER_REG_SRV: ${{ vars.ASAF_REG_SRV }}
         run: |
           docker build -t ohad-petclinic-gha .
-          docker tag ohad-petclinic-gha:latest ohadz.jfrog.io/docker/ohad-petclinic-gha:latest
+          docker tag ohad-petclinic-gha:latest z0xray18645v4.jfrogdev.org/containers/ohad-petclinic-gha:latest
        #echo " this is the tag ${{ vars.DOCKER_IMAGE_TAG }} "
        #echo " this is also the tag $(echo $DOCKER_REG_SRV/$DOCKER_REG_NAME/$DOCKER_IMAGE_NAME) "
        #docker build -t $DOCKER_IMAGE_NAME .
        #docker tag $DOCKER_IMAGE_NAME $JOB_DOCKER_IMAGE_TAG
       - name: Push Docker Image to RT
        #run: docker push $DOCKER_IMAGE_TAG
-        run: jf docker push ohadz.jfrog.io/docker/ohad-petclinic-gha:latest
+        run: jf docker push z0xray18645v4.jfrogdev.org/containers/ohad-petclinic-gha:latest
       
       - name: Collect and Publish Build Info
         run: |
