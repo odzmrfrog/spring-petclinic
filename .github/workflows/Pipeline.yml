@@ -67,7 +67,7 @@ jobs:
         
       - name: Push Docker Image to RT
        #run: docker push $DOCKER_IMAGE_TAG
-        run: jf docker push soleng.jfrog.il/ohadz-test-docker/ohad-petclinic-gha:latest
+        run: jf docker push soleng.jfrog.io/ohadz-test-docker/ohad-petclinic-gha:latest
       
       - name: Collect and Publish Build Info
         run: |
