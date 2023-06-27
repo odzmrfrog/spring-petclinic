@@ -1,4 +1,4 @@
-name: "Pet Clinic GHA cli"
+name: "Ohadz_Pet_Clinic_GHA_cli"
 
 on: 
   push:
