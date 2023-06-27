@@ -63,7 +63,7 @@ jobs:
        #docker tag $DOCKER_IMAGE_NAME $JOB_DOCKER_IMAGE_TAG
       
       - name: Tag Docker Image
-        run: docker tag ohad-petclinic-gha:latest soleng.jfrog.il/ohadz-test-docker/ohad-petclinic-gha:latest
+        run: docker tag ohad-petclinic-gha:latest soleng.jfrog.io/ohadz-test-docker/ohad-petclinic-gha:latest
         
       - name: Push Docker Image to RT
        #run: docker push $DOCKER_IMAGE_TAG
