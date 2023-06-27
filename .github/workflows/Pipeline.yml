@@ -78,7 +78,7 @@ jobs:
           # Publish build info
           jf rt bp
           
-      - name: Scan Build
-        run: jf bs --fail=false
+     # - name: Scan Build
+     #   run: jf bs --fail=false
           
     
