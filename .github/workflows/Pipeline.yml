@@ -26,6 +26,8 @@ jobs:
           JF_USER: ${{ secrets.JF_USER }}
           JF_PASSWORD: ${{ secrets.JF_PASS }}
           SERVER_ID: setup-jfrog-cli-server
+        with:
+          download-repository: jfrog-cli-remote
           
       - name: Configure Repos          
         run: jf mvnc --server-id-resolve=setup-jfrog-cli-server --server-id-deploy=setup-jfrog-cli-server --repo-resolve-releases=${{ vars.MVN_VIRTUAL_RELEASE_REPO }} --repo-deploy-releases=${{ vars.MVN_VIRTUAL_RELEASE_REPO }} --repo-resolve-snapshots=${{ vars.MVN_VIRTUAL_SNAPSHOTS_REPO }} --repo-deploy-snapshots=${{ vars.MVN_VIRTUAL_SNAPSHOTS_REPO }}     
