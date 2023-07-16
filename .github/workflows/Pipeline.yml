@@ -26,8 +26,8 @@ jobs:
           JF_USER: ${{ secrets.JF_USER }}
           JF_PASSWORD: ${{ secrets.JF_PASS }}
           SERVER_ID: setup-jfrog-cli-server
-        with:
-          download-repository: jfrog-cli-remote
+      #  with:
+      #    download-repository: jfrog-cli-remote
           
       - name: Configure Repos          
         run: jf mvnc --server-id-resolve=setup-jfrog-cli-server --server-id-deploy=setup-jfrog-cli-server --repo-resolve-releases=${{ vars.MVN_VIRTUAL_RELEASE_REPO }} --repo-deploy-releases=${{ vars.MVN_VIRTUAL_RELEASE_REPO }} --repo-resolve-snapshots=${{ vars.MVN_VIRTUAL_SNAPSHOTS_REPO }} --repo-deploy-snapshots=${{ vars.MVN_VIRTUAL_SNAPSHOTS_REPO }}     
@@ -65,11 +65,11 @@ jobs:
        #docker tag $DOCKER_IMAGE_NAME $JOB_DOCKER_IMAGE_TAG
       
       - name: Tag Docker Image
-        run: docker tag ohad-petclinic-gha:latest z0avivxray3784b.jfrogdev.org/ohadz-test-docker/ohad-petclinic-gha:latest
+        run: docker tag ohad-petclinic-gha:latest soleng.jfrog.io/ohadz-test-docker/ohad-petclinic-gha:latest
         
       - name: Push Docker Image to RT
        #run: docker push $DOCKER_IMAGE_TAG
-        run: jf docker push z0avivxray3784b.jfrogdev.org/ohadz-test-docker/ohad-petclinic-gha:latest
+        run: jf docker push soleng.jfrog.io/ohadz-test-docker/ohad-petclinic-gha:latest
       
       - name: Collect and Publish Build Info
         run: |
@@ -80,7 +80,7 @@ jobs:
           # Publish build info
           jf rt bp
           
-     # - name: Scan Build
-     #   run: jf bs --fail=false
+      - name: Scan Build
+        run: jf bs --fail=false
           
     
