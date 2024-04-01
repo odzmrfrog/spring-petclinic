@@ -79,7 +79,7 @@ jobs:
           # Collect VCS details from git and add them to the build
           jf rt bag
           # Publish build info
-          jf rt bp --project=0hadz 
+          jf rt bp --project=ohadz 
           
     #  - name: Scan Build
     #    run: jf bs --fail=false
