@@ -29,6 +29,12 @@ jobs:
       #  with:
       #    download-repository: jfrog-cli-remote
           
+      - name: Curation audit
+        run: jf ca
+      
+      - name: Source Code scan
+        run: jf audit
+      
       - name: Configure Repos          
         run: jf mvnc --server-id-resolve=setup-jfrog-cli-server --server-id-deploy=setup-jfrog-cli-server --repo-resolve-releases=${{ vars.MVN_VIRTUAL_RELEASE_REPO }} --repo-deploy-releases=${{ vars.MVN_VIRTUAL_RELEASE_REPO }} --repo-resolve-snapshots=${{ vars.MVN_VIRTUAL_SNAPSHOTS_REPO }} --repo-deploy-snapshots=${{ vars.MVN_VIRTUAL_SNAPSHOTS_REPO }} 
         
@@ -81,7 +87,7 @@ jobs:
           # Publish build info
           jf rt bp --project=ohadz 
           
-    #  - name: Scan Build
-    #    run: jf bs --fail=false
+      - name: Scan Build
+        run: jf bs --fail=false
           
     
